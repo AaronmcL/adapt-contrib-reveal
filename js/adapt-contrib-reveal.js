@@ -16,7 +16,12 @@ define([
             return Adapt.device.touch == true ? {
                 'click .reveal-widget-control': 'clickReveal',
                 'inview':                       'inview',
-                'click .reveal-popup-open':     'openPopup'
+                'click .reveal-popup-open':     'openPopup',
+                'swipeleft .reveal-widget-slider ' : 'onSwipe',
+                'swiperight.reveal-widget-slider ' : 'onSwipe',
+                'swipeup   .reveal-widget-slider ' : 'onSwipe',
+                'swipedown .reveal-widget-slider ' : 'onSwipe',
+
             } : {
                 'click .reveal-widget-control': 'clickReveal',
                 'inview':                       'inview',
@@ -345,7 +350,36 @@ define([
 
             this.setControlText(this.model.get('_revealed'));
         },
+        onSwipe: function(event) {
+            var direction = this.model.get('_direction');
+            var isRevealed = this.model.get('_revealed');
 
+            switch (event.type) {
+                case 'swipeleft':
+                    if (direction == 'right') {
+                        if (!isRevealed) {
+                            this.clickReveal(event);
+                        }
+                    } else if (direction == 'left') {
+                        if (isRevealed) {
+                            this.clickReveal(event);
+                        }
+                    }
+                    break;
+
+                case 'swiperight':
+                    if (direction == 'right') {
+                        if (isRevealed) {
+                            this.clickReveal(event)
+                        }
+                    } else if (direction == 'left') {
+                        if (!isRevealed){
+                            this.clickReveal(event);
+                        }
+                    }
+                    break;
+            }
+        },
         openPopup: function (event) {
             event.preventDefault();
 
