@@ -17,8 +17,8 @@ define([
                 'click .reveal-widget-control': 'clickReveal',
                 'inview':                       'inview',
                 'click .reveal-popup-open':     'openPopup',
-                'swipeleft .reveal-widget-slider ' : 'onSwipe',
-                'swiperight.reveal-widget-slider ' : 'onSwipe'
+                'swipeleft .reveal-widget-slider' : 'onSwipe',
+                'swiperight .reveal-widget-slider' : 'onSwipe'
 
             } : {
                 'click .reveal-widget-control': 'clickReveal',
